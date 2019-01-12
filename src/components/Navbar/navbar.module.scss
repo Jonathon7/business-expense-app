@@ -1,0 +1,49 @@
+@import "../../variables.scss";
+
+.navCont {
+  background-color: $BG;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+
+  .icon {
+    font-size: 28px;
+    cursor: pointer;
+    display: inline;
+    padding-left: 20px;
+  }
+
+  .admin {
+    display: flex;
+    padding-right: 20px;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  background-color: $BG;
+  height: 100vh;
+  width: 55%;
+  border-top: solid 1px white;
+  border-right: solid 1px white;
+  transition: 1s;
+
+  .link {
+    padding-top: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+  }
+}
+
+.hidden {
+  position: fixed;
+  background-color: $BG;
+  border-top: solid 1px white;
+  height: 100vh;
+  width: 0;
+  transition: 1s;
+}

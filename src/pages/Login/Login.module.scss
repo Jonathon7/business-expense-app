@@ -1,0 +1,93 @@
+@import "../../variables.scss";
+
+.loginCont {
+  background-color: $BG;
+  padding-bottom: 50px;
+  .loginInnerCont {
+    max-width: 85%;
+    margin: 0 auto;
+    padding-top: 75px;
+
+    h2 {
+      color: white;
+      padding-bottom: 20px;
+      font-size: 20px;
+      transition: 0.5s;
+    }
+
+    button {
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .loginInputs {
+      padding-bottom: 50px;
+      input {
+        width: 300px;
+        height: 25px;
+        margin: 15px;
+        background-color: $BG;
+        border-color: $BG;
+        border-style: none;
+        color: white;
+      }
+      .username {
+        display: flex;
+        align-items: center;
+        border-bottom: solid 0.2px gray;
+      }
+      .password {
+        display: flex;
+        align-items: center;
+        border-bottom: solid 0.2px gray;
+      }
+    }
+    .loginButton {
+      padding: 12px;
+      width: 340px;
+      background-color: $BT;
+      border-color: $BT;
+      transition: 0.5s;
+    }
+    .loginSignupCont {
+      h2 {
+        padding-top: 20px;
+      }
+      .signupButton {
+        padding: 12px;
+        width: 340px;
+        background-color: $BT;
+        border-color: $BT;
+        transition: 0.5s;
+      }
+    }
+  }
+}
+
+.disabled {
+  padding: 12px;
+  width: 340px;
+  background-color: gray;
+  border-color: gray;
+}
+
+.createAccount {
+  padding: 12px;
+  width: 340px;
+  background-color: $BT;
+  border-color: $BT;
+}
+
+.description {
+  max-width: 85%;
+  margin: 0 auto;
+  h1 {
+    border-bottom: solid 1px gray;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+}
