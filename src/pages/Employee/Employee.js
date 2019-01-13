@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./employee.module.scss";
+// import styles from "./employee.module.scss";
 
 export default class Employee extends Component {
   render() {

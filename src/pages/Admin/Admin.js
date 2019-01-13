@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+// import { connect } from "react-redux";
+// import { getEmployees } from "../../ducks/reducer";
+import Chart from "../../components/Charts/Chart";
 import axios from "axios";
-import { Bar } from "react-chartjs-2";
 
-export default class Admin extends Component {
+class Admin extends Component {
   constructor() {
     super();
 
@@ -11,8 +13,8 @@ export default class Admin extends Component {
       employees: []
     };
   }
-
   componentDidMount() {
+    // this.props.getEmployees();
     axios
       .get("/api/employees")
       .then(response => {
@@ -24,19 +26,22 @@ export default class Admin extends Component {
         console.log(err);
       });
   }
+
   render() {
     return (
       <div>
         <Navbar />
-        <Bar
-          data={this.state.employees}
-          options={{
-            title: {
-              display: this.state.username
-            }
-          }}
-        />
+        <Chart />
       </div>
     );
   }
 }
+
+export default Admin;
+
+// const mapStateToProps = state => state;
+
+// export default connect(
+//   mapStateToProps,
+//   { getEmployees }
+// )(Admin);

@@ -1,37 +1,65 @@
 @import "../../variables.scss";
 
 .loginCont {
-  background-color: $BG;
+  background-color: white;
   padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .appTitle {
+    font-size: 32px;
+    color: $BT;
+  }
+  .loginHeaders {
+    max-width: 75%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    padding-top: 50px;
+    .loginHeadersText {
+      padding: 15px;
+      h2 {
+        padding-left: 5px;
+        color: $BT;
+        font-size: 18px;
+        line-height: 1.5;
+        transition: 0.5s;
+        white-space: nowrap;
+        margin: 0;
+      }
+    }
+  }
   .loginInnerCont {
     max-width: 85%;
     margin: 0 auto;
-    padding-top: 75px;
-
-    h2 {
-      color: white;
-      padding-bottom: 20px;
-      font-size: 20px;
-      transition: 0.5s;
-    }
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     button {
       color: white;
       font-weight: bold;
       font-size: 15px;
-      cursor: pointer;
+    }
+
+    h2 {
+      color: $BT;
     }
 
     .loginInputs {
+      width: 350px;
       padding-bottom: 50px;
       input {
         width: 300px;
         height: 25px;
         margin: 15px;
-        background-color: $BG;
-        border-color: $BG;
+        background-color: white;
+        border-color: white;
         border-style: none;
-        color: white;
+        color: black;
       }
       .username {
         display: flex;
@@ -50,10 +78,14 @@
       background-color: $BT;
       border-color: $BT;
       transition: 0.5s;
+      cursor: pointer;
     }
     .loginSignupCont {
       h2 {
         padding-top: 20px;
+        font-size: 18px;
+        color: $BT;
+        padding-bottom: 15px;
       }
       .signupButton {
         padding: 12px;
@@ -61,6 +93,11 @@
         background-color: $BT;
         border-color: $BT;
         transition: 0.5s;
+        cursor: pointer;
+        h3 {
+          margin: 0;
+          font-size: 15px;
+        }
       }
     }
   }
@@ -71,6 +108,12 @@
   width: 340px;
   background-color: gray;
   border-color: gray;
+  cursor: not-allowed;
+  h3 {
+    margin: 0;
+    font-size: 15px;
+    color: $BG;
+  }
 }
 
 .createAccount {
@@ -80,14 +123,208 @@
   border-color: $BT;
 }
 
-.description {
-  max-width: 85%;
-  margin: 0 auto;
-  h1 {
-    border-bottom: solid 1px gray;
+.notificationCont {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  height: 50px;
+  width: 220px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  border: solid 1px $BT;
+  transition: 0.5s;
+  h2 {
+    margin: 4px;
+    font-size: 14px;
+    color: $BT;
+    white-space: nowrap;
   }
+}
 
-  p {
-    line-height: 1.5;
+.hiddenNotification {
+  position: absolute;
+  top: 60px;
+  right: 0px;
+  height: 50px;
+  width: 0px;
+  background-color: transparent;
+  border: solid 0.1px $BT;
+  display: flex;
+  align-items: center;
+  transition: 1s;
+  h2 {
+    margin: 4px;
+    font-size: 14px;
+    color: white;
+    white-space: nowrap;
+  }
+}
+.descriptionCont {
+  background-image: url("../../images/bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .description {
+    max-width: 85%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      color: white;
+      text-align: center;
+      font-size: 40px;
+      margin: 3px;
+    }
+
+    p {
+      color: white;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    button {
+      width: 100px;
+      padding: 5px;
+      background-color: transparent;
+      color: white;
+      font-weight: bold;
+      border: solid 2px white;
+      transition: 0.5s;
+    }
+
+    button:hover {
+      background-color: white;
+      color: black;
+    }
+  }
+}
+
+.emptyInput {
+  h1 {
+    font-size: 15px;
+    margin: 0;
+    color: #cc0000;
+    padding-right: 70px;
+    white-space: nowrap;
+  }
+}
+
+.usernameTaken {
+  h1 {
+    font-size: 15px;
+    margin: 0;
+    color: #cc0000;
+  }
+}
+
+@media (min-width: 720px) {
+  .loginCont {
+    .loginInnerCont {
+      .loginInputs {
+        width: 500px;
+        input {
+          width: 450px;
+        }
+      }
+      .loginButton {
+        width: 500px;
+      }
+      .loginSignupCont {
+        .signupButton {
+          width: 500px;
+        }
+      }
+    }
+
+    .createAccount {
+      padding: 12px;
+      width: 500px;
+      background-color: $BT;
+      border-color: $BT;
+    }
+
+    .disabled {
+      padding: 12px;
+      width: 500px;
+      background-color: gray;
+      border-color: gray;
+      cursor: not-allowed;
+      h3 {
+        margin: 0;
+        font-size: 15px;
+        color: $BG;
+      }
+    }
+  }
+}
+
+@media (min-width: 1350px) {
+  .loginOuterCont {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    flex-direction: row-reverse;
+    .loginCont {
+      width: 80%;
+      .appTitle {
+        padding-top: 30px;
+        font-size: 40px;
+      }
+
+      .loginHeaders {
+        max-width: 62%;
+        h2 {
+          font-size: 25px;
+        }
+      }
+      .loginInnerCont {
+        padding-bottom: 20px;
+        .loginInputs {
+          width: 540px;
+        }
+        .loginButton {
+          width: 540px;
+          height: 55px;
+        }
+        .loginSignupCont {
+          .signupButton {
+            width: 540px;
+            height: 55px;
+          }
+        }
+        .disabled {
+          width: 540px;
+          height: 55px;
+        }
+        .createAccount {
+          width: 540px;
+          height: 55px;
+        }
+      }
+    }
+  }
+  .descriptionCont {
+    height: 100vh;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1500px) {
+  .loginOuterCont {
+    .loginCont {
+      .appTitle {
+        font-size: 45px;
+        padding-top: 120px;
+      }
+      .loginInnerCont {
+        padding-bottom: 150px;
+      }
+    }
   }
 }
