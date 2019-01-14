@@ -10,6 +10,8 @@ const app = express();
 
 app.use(json());
 
+app.use(express.static(`${__dirname}/../build`));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -20,8 +22,6 @@ app.use(
     }
   })
 );
-
-app.use(express.static(`${__dirname}/../build`));
 
 app.post("/auth/signup", signup);
 app.post("/auth/login", login);

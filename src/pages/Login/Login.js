@@ -3,7 +3,6 @@ import axios from "axios";
 import styles from "./Login.module.scss";
 import lock from "../../images/lock-icon.png";
 import user from "../../images/user.png";
-import bg from "../../images/bg.jpg";
 
 export default class Login extends Component {
   constructor() {
@@ -88,6 +87,16 @@ export default class Login extends Component {
           <div className={styles.hiddenNotification} />
         )}
         <div className={styles.loginOuterCont}>
+          <div className={styles.descriptionCont}>
+            <div className={styles.description}>
+              <h1>Sign in to the App</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea,
+                maxime minima ipsum eum neque beatae.
+              </p>
+              <button>See More</button>
+            </div>
+          </div>
           <div className={styles.loginCont}>
             <h1 className={styles.appTitle}>Business Expenses</h1>
             <div className={styles.loginHeaders}>
@@ -158,16 +167,6 @@ export default class Login extends Component {
                   <h3>Signup</h3>
                 </button>
               </div>
-            </div>
-          </div>
-          <div className={styles.descriptionCont}>
-            <div className={styles.description}>
-              <h1>Sign in to the App</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea,
-                maxime minima ipsum eum neque beatae.
-              </p>
-              <button>See More</button>
             </div>
           </div>
         </div>

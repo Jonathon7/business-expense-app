@@ -1,0 +1,12 @@
+.adminCont {
+  padding-top: 100px;
+}
+
+.dropdown {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  transform: scale(1, 0.5);
+  font-size: 20px;
+  transition: 1s;
+}

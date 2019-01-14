@@ -1,11 +1,14 @@
 @import "../../variables.scss";
 
 .navCont {
-  background-color: $BG;
+  background-color: $BT;
   display: flex;
+  position: fixed;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   color: white;
+  height: 68px;
 
   .icon {
     font-size: 28px;
@@ -21,28 +24,51 @@
 }
 
 .menu {
-  display: flex;
-  flex-direction: column;
-  background-color: $BG;
+  position: fixed;
+  top: 68px;
+  background-color: white;
   height: 100vh;
-  width: 55%;
-  border-top: solid 1px white;
-  border-right: solid 1px white;
+  width: 50%;
+  z-index: 2;
+  border-right: solid 1px $BT;
   transition: 1s;
+  .menuText {
+    display: flex;
+    flex-direction: column;
+    transition: 1s;
+    .link {
+      padding-top: 10px;
+      padding-left: 10px;
+      text-decoration: none;
+      color: $BT;
+      margin: 10px;
+      white-space: nowrap;
+    }
+  }
+}
 
+.menu {
+  .hideMenuText {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: 1s;
+  }
   .link {
     padding-top: 10px;
     padding-left: 10px;
     text-decoration: none;
     color: white;
     margin: 10px;
+    white-space: nowrap;
   }
 }
 
 .hidden {
   position: fixed;
-  background-color: $BG;
-  border-top: solid 1px white;
+  top: 68px;
+  background-color: white;
+  border-right: solid 1px $BT;
   height: 100vh;
   width: 0;
   transition: 1s;

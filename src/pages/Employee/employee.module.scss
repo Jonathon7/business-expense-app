@@ -1,0 +1,23 @@
+.formCont {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  padding-left: 10px;
+  border: solid 2px black;
+}
+
+.expenseType {
+  display: flex;
+  flex-direction: column;
+}
+
+.reportPreview {
+  background: black;
+  position: absolute;
+  top: 350px;
+  width: 100%;
+}
+
+.loginDrop {
+}

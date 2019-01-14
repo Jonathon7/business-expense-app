@@ -1,7 +1,7 @@
-import { createStore } from "redux";
-import { devToolsEnhancer } from "redux-devtools-extension";
+import { createStore, applyMiddleware } from "redux";
+import promiseMiddleware from "redux-promise-middleware";
 import reducer from "./reducer";
 
-const store = createStore(reducer, devToolsEnhancer());
+const middleware = applyMiddleware(promiseMiddleware());
 
-export default createStore(reducer, store);
+export default createStore(reducer, middleware);

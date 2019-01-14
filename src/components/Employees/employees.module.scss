@@ -1,0 +1,17 @@
+.employeeCont {
+  display: flex;
+  justify-content: space-around;
+  border: solid 2px gray;
+  border-radius: 10px;
+  max-width: 85%;
+  margin: 25px auto;
+  h1 {
+    font-size: 17px;
+    text-align: center;
+    color: gray;
+  }
+  h3 {
+    text-align: center;
+    color: gray;
+  }
+}

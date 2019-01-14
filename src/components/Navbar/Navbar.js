@@ -7,7 +7,8 @@ export default class Navbar extends Component {
     super();
 
     this.state = {
-      menu: false
+      menu: false,
+      showMenuText: false
     };
   }
 
@@ -15,6 +16,12 @@ export default class Navbar extends Component {
     this.setState({
       menu: !this.state.menu
     });
+
+    setTimeout(() => {
+      this.setState({
+        showMenuText: !this.state.showMenuText
+      });
+    }, 300);
   };
 
   render() {
@@ -31,15 +38,21 @@ export default class Navbar extends Component {
         </div>
         {this.state.menu ? (
           <div className={styles.menu}>
-            <Link to="/admin" className={styles.link}>
-              Manage Employees
-            </Link>
-            <Link to="/admin" className={styles.link}>
-              Reports
-            </Link>
-            <Link to="/admin" className={styles.link}>
-              Past Reports
-            </Link>
+            <div
+              className={
+                this.state.showMenuText ? styles.menuText : styles.hideMenuText
+              }
+            >
+              <Link to="/admin" className={styles.link}>
+                Manage Employees
+              </Link>
+              <Link to="/admin" className={styles.link}>
+                Reports
+              </Link>
+              <Link to="/admin" className={styles.link}>
+                Past Reports
+              </Link>
+            </div>
           </div>
         ) : (
           <div className={styles.hidden} />

@@ -1,47 +1,67 @@
 import React, { Component } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-// import { connect } from "react-redux";
-// import { getEmployees } from "../../ducks/reducer";
+import styles from "./Admin.module.scss";
+import { connect } from "react-redux";
+import { getEmployees } from "../../ducks/reducer";
 import Chart from "../../components/Charts/Chart";
-import axios from "axios";
+import Employees from "../../components/Employees/Employees";
 
 class Admin extends Component {
   constructor() {
     super();
 
     this.state = {
-      employees: []
+      dropdown: 1
     };
   }
   componentDidMount() {
-    // this.props.getEmployees();
-    axios
-      .get("/api/employees")
-      .then(response => {
-        this.setState({
-          employees: response.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.props.getEmployees();
   }
 
+  toggleDropdown = () => {
+    this.setState({
+      dropdown: this.state.dropdown + 4
+    });
+  };
+
   render() {
+    let dispEmployees = this.props.employees.map(employee => {
+      return (
+        <Employees
+          key={employee.employee_id}
+          name={employee.name}
+          amountRequested={employee.amount_requested}
+          amountRecieved={employee.amount_recieved}
+        />
+      );
+    });
+
+    let dropdown = dispEmployees.slice(0, this.state.dropdown);
+
     return (
       <div>
         <Navbar />
-        <Chart />
+        <div className={styles.adminCont}>
+          <div className={styles.chartCont}>
+            <Chart />
+          </div>
+          {dropdown}
+          <div className={styles.dropdown} onClick={this.toggleDropdown}>
+            &#9660;
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default Admin;
+const mapStateToProps = state => {
+  return {
+    employees: state.employees
+  };
+};
 
-// const mapStateToProps = state => state;
-
-// export default connect(
-//   mapStateToProps,
-//   { getEmployees }
-// )(Admin);
+export default connect(
+  mapStateToProps,
+  { getEmployees }
+)(Admin);
