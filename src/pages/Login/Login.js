@@ -3,8 +3,10 @@ import axios from "axios";
 import styles from "./Login.module.scss";
 import lock from "../../images/lock-icon.png";
 import user from "../../images/user.png";
+import { connect } from "react-redux";
+import { getUserInfo } from "../../ducks/reducer";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor() {
     super();
 
@@ -73,6 +75,7 @@ export default class Login extends Component {
       } else if (!response.data.isAdmin) {
         this.props.history.push("/employee");
       }
+      this.props.getUserInfo(response.data);
     });
   };
 
@@ -174,3 +177,14 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    userInfo: state.userInfo
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getUserInfo }
+)(Login);

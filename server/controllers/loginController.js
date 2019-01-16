@@ -39,14 +39,26 @@ const login = async (req, res) => {
       req.session.user = {
         isAdmin: employee.isAdmin,
         id: employee.employee_id,
-        username: employee.username
+        username: employee.username,
+        picture: employee.picture,
+        name: employee.name
       };
       res.status(200).json(req.session.user);
     }
   }
 };
 
+const logout = (req, res) => {
+  req.session.destroy();
+};
+
+const adminOnly = (req, res) => {
+  res.status(200).json(req.session);
+};
+
 module.exports = {
   signup,
-  login
+  login,
+  adminOnly,
+  logout
 };

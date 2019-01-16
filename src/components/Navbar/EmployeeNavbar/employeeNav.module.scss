@@ -8,6 +8,7 @@
   height: 68px;
   position: fixed;
   width: 100%;
+  z-index: 5;
   h2 {
     margin: 0;
     color: white;
@@ -20,9 +21,8 @@
   cursor: pointer;
   color: white;
 }
-
 .navUser {
-  padding-right: 10px;
+  padding-right: 20px;
 }
 
 .sideMenu {
@@ -30,7 +30,7 @@
   top: 68px;
   z-index: 2;
   height: 100vh;
-  width: 80%;
+  width: 100%;
   border-right: solid 1px $BT;
   background-color: white;
   transition: 1s;
@@ -49,4 +49,43 @@
   height: 100vh;
   width: 0px;
   transition: 1s;
+}
+
+.profileCont {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  white-space: nowrap;
+  color: $TX;
+  transition: 1s;
+}
+
+.showMenuTextCont {
+  transition: 1s;
+}
+
+.showMenuText {
+  transition: 1s;
+}
+
+.hideMenuText {
+  transition: 1s;
+  opacity: 0;
+}
+
+.newReports,
+.approvedReports {
+  max-width: 375px;
+  margin: auto;
+  padding-top: 150px;
+  font-size: 22px;
+  color: $TX;
+  h3 {
+    padding-bottom: 10px;
+    border-bottom: solid 1px $TX;
+  }
+}
+
+.approvedReports {
+  padding-top: 0;
 }

@@ -5,16 +5,32 @@ import { connect } from "react-redux";
 import { getEmployees } from "../../ducks/reducer";
 import Chart from "../../components/Charts/Chart";
 import Employees from "../../components/Employees/Employees";
+import axios from "axios";
 
 class Admin extends Component {
   constructor() {
     super();
 
     this.state = {
-      dropdown: 1
+      dropdown: 1,
+      loggedIn: false
     };
   }
   componentDidMount() {
+    axios
+      .get("/auth/user")
+      .then(response => {
+        console.log(response.data);
+        if (!response.data.user) {
+          this.props.history.push("/");
+        } else if (response.data.user) {
+          this.props.history.push("/admin");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
     this.props.getEmployees();
   }
 

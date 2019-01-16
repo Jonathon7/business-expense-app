@@ -1,10 +1,29 @@
+@import "../../variables.scss";
+
+.employeeCont {
+  padding-bottom: 10px;
+}
+
+.header {
+  position: relative;
+  top: 100px;
+  text-align: center;
+  color: $TX;
+  font-size: 28px;
+  border-bottom: solid 1px $TX;
+  max-width: 95%;
+  margin: auto;
+  padding-bottom: 10px;
+}
+
 .formCont {
-  padding-top: 100px;
+  padding-top: 120px;
   display: flex;
-  flex-direction: column;
-  max-width: 50%;
-  padding-left: 10px;
-  border: solid 2px black;
+  justify-content: space-around;
+  max-width: 400px;
+  margin: auto;
+  padding-bottom: 15px;
+  color: $TX;
 }
 
 .expenseType {
@@ -19,5 +38,70 @@
   width: 100%;
 }
 
-.loginDrop {
+.preview {
+  padding-top: 15px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  p {
+    font-size: 8px;
+  }
+}
+
+.reportListCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 375px;
+  margin: auto;
+}
+
+.reportList {
+  padding-top: 10px;
+  width: 100%;
+  border: solid 2px #efefef;
+  background-color: #efefef;
+  display: flex;
+  justify-content: space-between;
+  color: $TX;
+  h3 {
+    margin: 4px;
+  }
+}
+
+.reportListFirstCol {
+  padding-left: 10px;
+}
+
+.reportListAmount {
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  h3 {
+    margin: 0px;
+  }
+  .x {
+    color: red;
+    font-size: 15px;
+  }
+}
+
+.xButton {
+  position: relative;
+  color: red;
+  font-size: 20px;
+  text-align: end;
+  cursor: pointer;
+}
+
+.submitFormButton {
+  margin-top: 15px;
+  padding: 8px;
+  border-radius: 5px;
+  width: 75px;
+  background-color: $BT;
+  color: white;
+  border-color: white;
 }

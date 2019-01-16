@@ -1,0 +1,1 @@
+DELETE FROM reports WHERE title = $1;

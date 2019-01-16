@@ -3,8 +3,18 @@ const express = require("express");
 const { json } = require("body-parser");
 const massive = require("massive");
 const session = require("express-session");
-const { signup, login } = require("./controllers/loginController");
-const { getEmployees } = require("./controllers/employeeController");
+const { getEmployees, getUser } = require("./controllers/employeeController");
+const {
+  saveForm,
+  deleteForm,
+  getReports
+} = require("./controllers/formController");
+const {
+  signup,
+  login,
+  logout,
+  adminOnly
+} = require("./controllers/loginController");
 
 const app = express();
 
@@ -23,9 +33,20 @@ app.use(
   })
 );
 
+//login CTRL
 app.post("/auth/signup", signup);
 app.post("/auth/login", login);
+app.get("/auth/user", adminOnly);
+app.get("/auth/logout", logout);
+
+//Employee CTRL
 app.get("/api/employees", getEmployees);
+app.get("/api/user", getUser);
+
+//Form CTR
+app.get("/api/reports", getReports);
+app.post("/api/form", saveForm);
+app.delete("/api/form/:title", deleteForm);
 
 massive(process.env.CONNECTION_STRING)
   .then(db => app.set("db", db), console.log("Database Connected"))

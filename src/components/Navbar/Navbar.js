@@ -50,7 +50,7 @@ export default class Navbar extends Component {
                 Reports
               </Link>
               <Link to="/admin" className={styles.link}>
-                Past Reports
+                Approved
               </Link>
             </div>
           </div>

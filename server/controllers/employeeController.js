@@ -6,9 +6,15 @@ const getEmployees = (req, res) => {
     })
     .catch(err => {
       console.log(err);
+      res.sendStatus(500);
     });
 };
 
+const getUser = (req, res) => {
+  res.status(200).json(req.session.user);
+};
+
 module.exports = {
-  getEmployees
+  getEmployees,
+  getUser
 };
