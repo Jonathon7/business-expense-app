@@ -51,9 +51,23 @@ const getAllReports = (req, res) => {
     });
 };
 
+const getUserReport = (req, res) => {
+  const db = req.app.get("db");
+
+  db.get_users_report([req.params.id])
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+};
+
 module.exports = {
   saveForm,
   deleteForm,
   getReports,
-  getAllReports
+  getAllReports,
+  getUserReport
 };

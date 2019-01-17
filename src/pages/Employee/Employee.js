@@ -25,6 +25,16 @@ export default class Employee extends Component {
   }
 
   componentDidMount() {
+    this.userAuth();
+    this.getInitialUserInfo();
+  }
+
+  componentWillUnmount() {
+    this.userAuth();
+    this.getInitialUserInfo();
+  }
+
+  userAuth = () => {
     axios
       .get("/auth/user")
       .then(response => {
@@ -37,17 +47,19 @@ export default class Employee extends Component {
       .catch(err => {
         console.log(err);
       });
+  };
 
+  getInitialUserInfo = () => {
     axios.get("/api/user").then(response => {
       this.setState({
         username: response.data.username
       });
     });
-  }
+  };
 
   saveFormData = () => {
     let inputData = {
-      title: this.state.title + this.state.entryAmount,
+      title: this.state.title + " " + this.state.entryAmount,
       date: this.state.date,
       expense_type: this.state.selectedExpenseType,
       amount: this.state.inputAmount,
@@ -81,7 +93,6 @@ export default class Employee extends Component {
   handleDelete(title) {
     setTimeout(() => {
       if (!this.state.reports[0]) {
-        console.log("hit");
         this.setState({
           title: ""
         });

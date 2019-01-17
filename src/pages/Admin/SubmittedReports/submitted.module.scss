@@ -1,0 +1,177 @@
+@import "../../../variables.scss";
+
+.reportListCont {
+  padding-top: 68px;
+}
+
+.reportList {
+  width: 100%;
+  margin: auto;
+  border: solid 2px #efefef;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  h3 {
+    color: $TX;
+    font-size: 20px;
+    margin: 0;
+    padding-left: 8px;
+  }
+  h4 {
+    color: $TX;
+    font-size: 16px;
+    font-weight: lighter;
+    margin: 0;
+    padding-left: 8px;
+  }
+}
+
+.dateStatus {
+  display: flex;
+  justify-content: space-between;
+}
+
+.usernameName {
+  display: flex;
+  justify-content: space-between;
+}
+
+.viewedBy {
+  h4 {
+    text-align: end;
+    color: $TX;
+    padding-right: 22px;
+    margin-bottom: 0;
+    color: $BT;
+  }
+}
+
+.typeAmount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.viewButton {
+  padding: 8px;
+  border-radius: 3px;
+  width: 60px;
+  background-color: $BT;
+  border-color: $BT;
+  color: white;
+}
+
+.formCont {
+  position: fixed;
+  z-index: 3;
+  width: 90%;
+  height: 450px;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  background-color: white;
+  border: solid 4px rgb(179, 179, 179);
+  border-radius: 3px;
+  transition: 1s;
+  h1,
+  h2,
+  h3 {
+    color: $TX;
+  }
+  h1,
+  h2 {
+    margin: 8px 0px;
+  }
+}
+
+.hiddenForm {
+  position: fixed;
+  z-index: -1;
+  width: 10px;
+  height: 10px;
+  left: 0;
+  right: 0;
+  top: 200px;
+  margin: auto;
+  background-color: white;
+  border-radius: 3px;
+  transition: 0.6s;
+}
+
+.formInnerCont {
+  max-width: 90%;
+  margin: auto;
+}
+
+.title {
+  border-bottom: solid 1px $TX;
+  h1 {
+    color: $BT;
+  }
+}
+
+.header {
+  padding-top: 20px;
+  border-bottom: solid 1px $TX;
+}
+
+.expenseType,
+.amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 2;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(193, 193, 193);
+  opacity: 0.9;
+}
+
+.titleUser {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.approveDeny {
+  display: flex;
+  width: 150px;
+  margin: auto;
+  padding-top: 22px;
+  justify-content: space-between;
+}
+
+.approve,
+.deny {
+  padding: 8px;
+  width: 60px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.approve,
+.deny {
+  background-color: #efefef;
+  color: black;
+  transition: 0.2s;
+}
+
+.approve:hover {
+  background-color: $BT;
+  color: white;
+}
+
+.deny:hover {
+  background-color: rgb(255, 100, 100);
+  color: white;
+}

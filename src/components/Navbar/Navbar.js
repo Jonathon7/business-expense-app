@@ -54,10 +54,7 @@ export default class Navbar extends Component {
                 this.state.showMenuText ? styles.menuText : styles.hideMenuText
               }
             >
-              <Link to="/admin" className={styles.link}>
-                Manage Employees
-              </Link>
-              <Link to="/admin" className={styles.link}>
+              <Link to="/reports" className={styles.link}>
                 Reports
               </Link>
               <Link to="/admin" className={styles.link}>

@@ -8,7 +8,8 @@ const {
   saveForm,
   deleteForm,
   getReports,
-  getAllReports
+  getAllReports,
+  getUserReport
 } = require("./controllers/formController");
 const {
   signup,
@@ -47,6 +48,7 @@ app.get("/api/user", getUser);
 //Form CTR
 app.get("/api/reports", getReports);
 app.get("/api/newreports", getAllReports);
+app.get("/api/user/report/:id", getUserReport);
 app.post("/api/form", saveForm);
 app.delete("/api/form/:title", deleteForm);
 
