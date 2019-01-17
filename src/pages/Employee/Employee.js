@@ -9,6 +9,7 @@ export default class Employee extends Component {
     super();
 
     this.state = {
+      entryAmount: 0,
       title: "",
       selectedExpenseType: "",
       inputAmount: "",
@@ -16,8 +17,11 @@ export default class Employee extends Component {
       comments: "",
       ispersonal: false,
       reports: [],
-      username: ""
+      username: "",
+      reportId: 0
     };
+
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +47,7 @@ export default class Employee extends Component {
 
   saveFormData = () => {
     let inputData = {
-      title: this.state.title,
+      title: this.state.title + this.state.entryAmount,
       date: this.state.date,
       expense_type: this.state.selectedExpenseType,
       amount: this.state.inputAmount,
@@ -54,12 +58,12 @@ export default class Employee extends Component {
 
     this.setState({
       reports: [...this.state.reports, inputData],
-      title: "",
       selectedExpenseType: "",
       inputAmount: "",
       date: "",
       comments: "",
-      ispersonal: false
+      ispersonal: false,
+      entryAmount: this.state.entryAmount + 1
     });
 
     axios.post("/api/form", inputData).catch(err => {
@@ -69,11 +73,21 @@ export default class Employee extends Component {
 
   submitForm = () => {
     this.setState({
-      reports: []
+      reports: [],
+      title: ""
     });
   };
 
-  handleDelete = title => {
+  handleDelete(title) {
+    setTimeout(() => {
+      if (!this.state.reports[0]) {
+        console.log("hit");
+        this.setState({
+          title: ""
+        });
+      }
+    }, 500);
+
     let filteredReports = this.state.reports.filter(
       report => report.title !== title
     );
@@ -85,7 +99,7 @@ export default class Employee extends Component {
     axios.delete(`/api/form/${title}`).catch(err => {
       console.log(err);
     });
-  };
+  }
 
   render() {
     let dispReports;

@@ -10,17 +10,18 @@
   color: white;
   height: 68px;
 
-  .icon {
-    font-size: 28px;
-    cursor: pointer;
-    display: inline;
-    padding-left: 20px;
-  }
-
   .admin {
     display: flex;
     padding-right: 20px;
   }
+}
+
+.icon {
+  font-size: 32px;
+  left: 0;
+  margin: 0;
+  cursor: pointer;
+  padding-left: 20px;
 }
 
 .menu {
@@ -66,6 +67,7 @@
 
 .hidden {
   position: fixed;
+  z-index: 1;
   top: 68px;
   background-color: white;
   border-right: solid 1px $BT;

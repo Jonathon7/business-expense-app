@@ -4,7 +4,7 @@ import styles from "./Admin.module.scss";
 import { connect } from "react-redux";
 import { getEmployees } from "../../ducks/reducer";
 import Chart from "../../components/Charts/Chart";
-import Employees from "../../components/Employees/Employees";
+import report from "../../images/report.png";
 import axios from "axios";
 
 class Admin extends Component {
@@ -12,15 +12,18 @@ class Admin extends Component {
     super();
 
     this.state = {
-      dropdown: 1,
-      loggedIn: false
+      dropdown: false,
+      loggedIn: false,
+      username: "",
+      amount: 3,
+      newReports: []
     };
   }
+
   componentDidMount() {
     axios
       .get("/auth/user")
       .then(response => {
-        console.log(response.data);
         if (!response.data.user) {
           this.props.history.push("/");
         } else if (response.data.user) {
@@ -32,28 +35,24 @@ class Admin extends Component {
       });
 
     this.props.getEmployees();
+    this.getAllReports();
   }
 
-  toggleDropdown = () => {
+  getAllReports = () => {
+    axios.get("/api/newreports").then(response => {
+      this.setState({
+        newReports: response.data
+      });
+    });
+  };
+
+  addMore = () => {
     this.setState({
-      dropdown: this.state.dropdown + 4
+      amount: this.state.amount + 3
     });
   };
 
   render() {
-    let dispEmployees = this.props.employees.map(employee => {
-      return (
-        <Employees
-          key={employee.employee_id}
-          name={employee.name}
-          amountRequested={employee.amount_requested}
-          amountRecieved={employee.amount_recieved}
-        />
-      );
-    });
-
-    let dropdown = dispEmployees.slice(0, this.state.dropdown);
-
     return (
       <div>
         <Navbar />
@@ -61,9 +60,13 @@ class Admin extends Component {
           <div className={styles.chartCont}>
             <Chart />
           </div>
-          {dropdown}
-          <div className={styles.dropdown} onClick={this.toggleDropdown}>
-            &#9660;
+        </div>
+        <div className={styles.footerCont}>
+          <div className={styles.reportIconCont}>
+            <p className={styles.newReportsNum}>
+              {this.state.newReports.length}
+            </p>
+            <img src={report} alt="" className={styles.reportIcon} />
           </div>
         </div>
       </div>
@@ -71,11 +74,7 @@ class Admin extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    employees: state.employees
-  };
-};
+const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,

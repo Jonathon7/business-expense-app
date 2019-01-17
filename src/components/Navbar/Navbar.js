@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./navbar.module.scss";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default class Navbar extends Component {
   constructor() {
@@ -8,8 +9,18 @@ export default class Navbar extends Component {
 
     this.state = {
       menu: false,
-      showMenuText: false
+      showMenuText: false,
+      username: "",
+      newReports: []
     };
+  }
+
+  componentDidMount() {
+    axios.get("/api/user").then(response => {
+      this.setState({
+        username: response.data.username
+      });
+    });
   }
 
   handleClick = () => {
@@ -31,9 +42,9 @@ export default class Navbar extends Component {
           <div className={styles.icon} onClick={this.handleClick}>
             &#9776;
           </div>
+
           <div className={styles.admin}>
-            <h2>Username</h2>
-            <img src="" alt="" />
+            <h2>{this.state.username}</h2>
           </div>
         </div>
         {this.state.menu ? (

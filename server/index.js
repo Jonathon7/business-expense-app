@@ -7,7 +7,8 @@ const { getEmployees, getUser } = require("./controllers/employeeController");
 const {
   saveForm,
   deleteForm,
-  getReports
+  getReports,
+  getAllReports
 } = require("./controllers/formController");
 const {
   signup,
@@ -45,6 +46,7 @@ app.get("/api/user", getUser);
 
 //Form CTR
 app.get("/api/reports", getReports);
+app.get("/api/newreports", getAllReports);
 app.post("/api/form", saveForm);
 app.delete("/api/form/:title", deleteForm);
 
@@ -54,7 +56,7 @@ massive(process.env.CONNECTION_STRING)
     console.log(err);
   });
 
-const port = 3002;
+const port = process.env.PORT || 3002;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

@@ -1,12 +1,36 @@
+@import "../../variables.scss";
+
 .adminCont {
   padding-top: 100px;
 }
 
-.dropdown {
+.footerCont {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 38px;
+  border-top: solid 2px $BT;
+  display: flex;
+  align-items: center;
+}
+
+.reportIconCont {
+  position: relative;
+  top: 2px;
+  left: 10px;
+  text-align: center;
+  width: 35px;
+}
+.newReportsNum {
   position: absolute;
-  right: 20px;
-  cursor: pointer;
-  transform: scale(1, 0.5);
-  font-size: 20px;
-  transition: 1s;
+  font-size: 15px;
+  text-align: center;
+  top: 0;
+  margin: 0;
+  color: white;
+  border: solid 1px white;
+  background-color: $BT;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
 }

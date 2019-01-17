@@ -43,7 +43,6 @@ class EmployeeNav extends Component {
 
   logout = () => {
     axios.get("/auth/logout");
-
     window.location.reload();
   };
 
