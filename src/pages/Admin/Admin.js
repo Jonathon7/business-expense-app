@@ -4,7 +4,6 @@ import styles from "./Admin.module.scss";
 import { connect } from "react-redux";
 import { getEmployees } from "../../ducks/reducer";
 import Chart from "../../components/Charts/Chart";
-import report from "../../images/report.png";
 import axios from "axios";
 
 class Admin extends Component {
@@ -35,16 +34,7 @@ class Admin extends Component {
       });
 
     this.props.getEmployees();
-    this.getAllReports();
   }
-
-  getAllReports = () => {
-    axios.get("/api/newreports").then(response => {
-      this.setState({
-        newReports: response.data
-      });
-    });
-  };
 
   addMore = () => {
     this.setState({
@@ -59,14 +49,6 @@ class Admin extends Component {
         <div className={styles.adminCont}>
           <div className={styles.chartCont}>
             <Chart />
-          </div>
-        </div>
-        <div className={styles.footerCont}>
-          <div className={styles.reportIconCont}>
-            <p className={styles.newReportsNum}>
-              {this.state.newReports.length}
-            </p>
-            <img src={report} alt="" className={styles.reportIcon} />
           </div>
         </div>
       </div>

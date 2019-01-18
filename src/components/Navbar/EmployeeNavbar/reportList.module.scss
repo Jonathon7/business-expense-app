@@ -18,3 +18,140 @@
     letter-spacing: 1px;
   }
 }
+
+.formCont {
+  position: fixed;
+  z-index: 6;
+  width: 90%;
+  height: 460px;
+  left: 0;
+  right: 0;
+  top: 80px;
+  margin: auto;
+  background-color: white;
+  border: solid 4px rgb(179, 179, 179);
+  border-radius: 3px;
+  transition: 1s;
+  h1,
+  h2,
+  h3 {
+    color: $TX;
+  }
+  h1,
+  h2 {
+    margin: 8px 0px;
+  }
+}
+
+.hiddenForm {
+  position: fixed;
+  z-index: -1;
+  width: 10px;
+  height: 10px;
+  left: 0;
+  right: 0;
+  top: 200px;
+  margin: auto;
+  background-color: white;
+  border-radius: 3px;
+  transition: 0.6s;
+}
+
+.formInnerCont {
+  max-width: 85%;
+  margin: auto;
+}
+
+.title {
+  border-bottom: solid 1px $TX;
+  h1 {
+    color: $BT;
+  }
+}
+
+.header {
+  padding-top: 20px;
+  border-bottom: solid 1px $TX;
+}
+
+.expenseType,
+.amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dateStatus {
+  display: flex;
+  justify-content: space-between;
+}
+
+.usernameName {
+  display: flex;
+  justify-content: space-between;
+}
+
+.viewedBy {
+  h4 {
+    text-align: end;
+    color: $TX;
+    padding-right: 22px;
+    margin-bottom: 0;
+    color: $BT;
+  }
+}
+
+.typeAmount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.viewButton {
+  padding: 8px;
+  border-radius: 3px;
+  width: 60px;
+  background-color: $BT;
+  border-color: $BT;
+  color: white;
+}
+
+.titleUser {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.comments {
+  display: flex;
+  justify-content: center;
+}
+
+.closeForm {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  cursor: pointer;
+  transform: scale(1.5);
+  font-weight: lighter;
+  animation: grow 0.5s linear;
+  color: $TX;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(1);
+    margin: 5px;
+  }
+
+  to {
+    transform: scale(1.5);
+    margin: 10px;
+  }
+}

@@ -26,6 +26,19 @@ export default class Submitted extends Component {
   }
 
   componentDidMount() {
+    axios
+      .get("/auth/user")
+      .then(response => {
+        if (!response.data.user) {
+          this.props.history.push("/");
+        } else if (response.data.user) {
+          this.props.history.push("/reports");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
     this.getInitialUserInfo();
     this.getAllReports();
   }
@@ -108,7 +121,6 @@ export default class Submitted extends Component {
         <div className={styles.reportList} key={report.report_id}>
           <div className={styles.titleUser}>
             <div>
-              {" "}
               <h3>{report.title}</h3>
             </div>
             <div>
@@ -153,7 +165,7 @@ export default class Submitted extends Component {
                   <textarea
                     name=""
                     id=""
-                    cols="50"
+                    cols="45"
                     rows="10"
                     value={this.state.comments}
                     readOnly
@@ -181,19 +193,3 @@ export default class Submitted extends Component {
     );
   }
 }
-
-// <div className={styles.dateStatus}>
-// <h3>{report.date}</h3>
-// <h3>{report.status}</h3>
-// </div>
-// <div className={styles.usernameName}>
-// <h3>{report.username}</h3>
-// <div className={styles.viewedBy}>
-//   <h3>Approver:</h3>
-//   <h4>H</h4>
-// </div>
-// </div>
-// <div className={styles.typeAmount}>
-// <h3>{report.expense_type}</h3>
-// <h3>${report.amount}</h3>
-// </div>
