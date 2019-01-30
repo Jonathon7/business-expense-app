@@ -1,15 +1,93 @@
 @import "../../variables.scss";
 
 .adminCont {
-  padding-top: 100px;
+  padding-top: 78px;
+  color: $TX;
+  width: 100%;
 }
 
-.footerCont {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  height: 38px;
-  border-top: solid 2px $BT;
+.adminHeader {
+  width: 92%;
+  margin: auto;
+  height: 40px;
+  justify-content: center;
+  border-bottom: solid 2px $TX;
+  padding-top: 10px;
+
+  h1 {
+    margin: 0px;
+    color: $TX;
+    font-size: 22px;
+    text-align: center;
+  }
+}
+
+.adminInner {
+  max-width: 400px;
+  margin: auto;
+  h1 {
+    padding-bottom: 30px;
+  }
+}
+
+.employeeList {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.navUser {
+  display: flex;
+  align-items: center;
+  width: 60px;
+}
+
+.profileIcon {
+  height: 20px;
+  border: solid 3px $BT;
+  background-color: white;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.iconUsername {
+  display: flex;
+  align-items: center;
+}
+
+.joinNum {
+  position: absolute;
+  top: 8vh;
+}
+
+@media (min-width: 500px) {
+  .adminInner {
+    max-width: 600px;
+  }
+
+  .employeeList {
+    justify-content: space-between;
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .adminHeader {
+    h1 {
+      font-size: 25px;
+    }
+  }
+
+  .iconUsername {
+    h2 {
+      font-size: 28px;
+    }
+  }
+
+  .numSubmitted {
+    h3 {
+      font-size: 22px;
+    }
+  }
 }

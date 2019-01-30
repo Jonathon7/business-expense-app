@@ -1,3 +1,3 @@
 SELECT *
 FROM reports
-WHERE stat = 'new';
+WHERE stat = $1;

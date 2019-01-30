@@ -1,3 +1,3 @@
 SELECT *
 FROM reports
-WHERE status = 'new' AND username= $1;
+WHERE stat = 'new' AND username= $1;

@@ -1,15 +1,53 @@
 @import "../../../variables.scss";
 
-.reportListCont {
-  border-top: solid 2px rgb(162, 162, 162);
-  border-bottom: solid 2px rgb(162, 162, 162);
+.submittedCont {
+  border-top: solid 2px $TX;
   max-width: 355px;
   margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
   cursor: pointer;
+  h3 {
+    margin: 7px;
+    font-size: 22px;
+    color: $TX;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+}
+
+.reportListCont {
+  border-top: solid 2px $TX;
+  max-width: 355px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  .submittedAmount {
+    color: $BT;
+  }
+  h3 {
+    margin: 7px;
+    font-size: 22px;
+    color: $TX;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+}
+
+.deniedCont {
+  border-top: solid 2px $TX;
+  max-width: 355px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  .submittedAmount {
+    color: rgb(255, 100, 100);
+  }
   h3 {
     margin: 7px;
     font-size: 22px;
@@ -129,7 +167,11 @@
 
 .comments {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  p {
+    margin: 4px;
+  }
 }
 
 .closeForm {
@@ -140,8 +182,78 @@
   cursor: pointer;
   transform: scale(1.5);
   font-weight: lighter;
-  animation: grow 0.5s linear;
+  animation: grow 0.2s linear;
   color: $TX;
+}
+
+.receiptIcon {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 10px;
+  cursor: pointer;
+  color: $TX;
+}
+
+.approvedReports {
+  max-width: 355px;
+  margin: auto;
+  font-size: 22px;
+  color: $TX;
+}
+
+.deniedReports {
+  max-width: 355px;
+  margin: auto;
+  font-size: 22px;
+  color: $TX;
+}
+
+.receipt {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 4;
+  width: 90%;
+  margin: auto;
+  height: 470px;
+  left: 0;
+  right: 0;
+  top: 80px;
+  background-color: white;
+  border: solid 4px rgb(179, 179, 179);
+  border-radius: 3px;
+  transition: 0.6s;
+}
+
+.hideImgX {
+  position: absolute;
+  bottom: -28px;
+  right: 5px;
+  padding-top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  color: black;
+  transform: scale(1.5);
+  animation: bigger 1s linear;
+}
+
+.receiptImg {
+  position: absolute;
+  width: 100%;
+  height: 470px;
+  bottom: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.hideReceipt {
+  position: absolute;
+  height: 10px;
+  width: 85%;
+  margin: auto;
 }
 
 @keyframes grow {

@@ -23,6 +23,10 @@
 }
 .navUser {
   padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 120px;
 }
 
 .sideMenu {
@@ -35,6 +39,7 @@
   border-right: solid 1px $BT;
   background-color: white;
   transition: 1s;
+  margin-bottom: 30px;
   .link {
     color: black;
     text-decoration: none;
@@ -61,6 +66,16 @@
   transition: 1s;
 }
 
+.profileIcon {
+  height: 20px;
+  border: solid 3px $BT;
+  background-color: white;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .showMenuTextCont {
   overflow: scroll;
   transition: 1s;
@@ -79,15 +94,92 @@
 .approvedReports {
   max-width: 355px;
   margin: auto;
-  padding-top: 150px;
   font-size: 22px;
   color: $TX;
-  h3 {
-    padding-bottom: 10px;
-    border-bottom: solid 1px $TX;
-  }
 }
 
 .approvedReports {
   padding-top: 0;
+}
+
+.userRequests {
+  display: flex;
+  justify-content: space-between;
+  max-width: 355px;
+  margin: auto;
+  font-size: 18px;
+  color: $TX;
+  border-bottom: solid 1px $TX;
+}
+
+.profileDropdown {
+  position: absolute;
+  right: 5%;
+  top: 60px;
+  width: 120px;
+  height: 220px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px lightgray;
+}
+
+.dropdownContent {
+  padding-left: 10px;
+  color: $TX;
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    color: $TX;
+    cursor: pointer;
+  }
+}
+
+.editButton {
+  cursor: pointer;
+}
+
+.profileEdit {
+  position: fixed;
+  z-index: 6;
+  background-color: white;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 250px;
+  height: 300px;
+  border: solid 1px $TX;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.profileEdit div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profileEdit input {
+  width: 170px;
+}
+
+.closeEdit {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.saveChanges {
+  position: relative;
+  width: 100px;
+  top: -10px;
+  left: 0;
+  right: 0;
+  margin: auto;
 }

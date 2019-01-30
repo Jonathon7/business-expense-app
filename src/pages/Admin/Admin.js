@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Admin.module.scss";
+import nav from "../../images/nav.png";
 import { connect } from "react-redux";
 import { getEmployees } from "../../ducks/reducer";
-import Chart from "../../components/Charts/Chart";
 import axios from "axios";
 
 class Admin extends Component {
@@ -15,7 +15,8 @@ class Admin extends Component {
       loggedIn: false,
       username: "",
       amount: 3,
-      newReports: []
+      newReports: [],
+      num: ""
     };
   }
 
@@ -34,21 +35,51 @@ class Admin extends Component {
       });
 
     this.props.getEmployees();
+    this.join();
   }
 
-  addMore = () => {
-    this.setState({
-      amount: this.state.amount + 3
-    });
+  join = () => {
+    axios
+      .get("/api/join")
+      .then(response => {
+        this.setState({
+          num: response.data[0].count
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
+    let dispEmployees;
+    if (this.props.employees) {
+      dispEmployees = this.props.employees.map(employee => {
+        return (
+          <div className={styles.employeeList} key={employee.employee_id}>
+            <div className={styles.iconUsername}>
+              <div className={styles.navUser}>
+                <img src={nav} alt="" className={styles.profileIcon} />
+              </div>
+              <h2>{employee.username}</h2>
+            </div>
+            <div className={styles.numSubmitted}>
+              <h3>Reports Submitted: {employee.reports}</h3>
+            </div>
+          </div>
+        );
+      });
+    }
     return (
       <div>
         <Navbar />
         <div className={styles.adminCont}>
-          <div className={styles.chartCont}>
-            <Chart />
+          <div className={styles.adminHeader}>
+            <div className={styles.adminInner}>
+              <p className={styles.joinNum}>{this.state.num}</p>
+              <h1>Employee List</h1>
+              <div>{dispEmployees}</div>
+            </div>
           </div>
         </div>
       </div>

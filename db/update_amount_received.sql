@@ -1,0 +1,1 @@
+UPDATE employees SET amount_received = amount_received + $2 WHERE username = $1;

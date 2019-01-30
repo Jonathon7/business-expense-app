@@ -1,0 +1,1 @@
+UPDATE employees SET amount_requested = amount_requested + $2 WHERE username = $1;

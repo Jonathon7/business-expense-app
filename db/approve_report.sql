@@ -1,0 +1,1 @@
+UPDATE reports SET stat = $2 WHERE report_id = $1;

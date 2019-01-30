@@ -18,7 +18,8 @@ export default class Employee extends Component {
       ispersonal: false,
       reports: [],
       username: "",
-      reportId: 0
+      reportId: 0,
+      file: ""
     };
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -57,6 +58,27 @@ export default class Employee extends Component {
     });
   };
 
+  submitFile = title => {
+    const formData = new FormData();
+    formData.append("file", this.state.file[0]);
+    axios
+      .post(`/api/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      .then(response => {
+        axios.post("/api/image", { image: response.data.Location, title });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  handleFileUpload = event => {
+    this.setState({ file: event.target.files });
+  };
+
   saveFormData = () => {
     let inputData = {
       title: this.state.title + " " + this.state.entryAmount,
@@ -68,6 +90,8 @@ export default class Employee extends Component {
       username: this.state.username
     };
 
+    this.submitFile(inputData.title);
+
     this.setState({
       reports: [...this.state.reports, inputData],
       selectedExpenseType: "",
@@ -78,9 +102,28 @@ export default class Employee extends Component {
       entryAmount: this.state.entryAmount + 1
     });
 
-    axios.post("/api/form", inputData).catch(err => {
-      console.log(err);
-    });
+    axios
+      .post("/api/form", inputData)
+      .catch(err => {
+        console.log(err);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.addRequestAmount(inputData.amount);
+  };
+
+  //adds request amount to the employee table in db
+  addRequestAmount = amount => {
+    axios
+      .post("/api/request", { amount })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   submitForm = () => {
@@ -246,13 +289,25 @@ export default class Employee extends Component {
               </div>
             </div>
           </form>
+          <div className={styles.outerImageUpload}>
+            <div className={styles.imageUpload}>
+              <p>Upload a receipt</p>
+              <div className={styles.uploadButtons}>
+                <input
+                  label="upload file"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  onChange={this.handleFileUpload}
+                />
+              </div>
+            </div>
+          </div>
           <div className={styles.preview}>
             {" "}
             <Preview
               title={this.state.title}
               isPersonal={this.state.isPersonal}
               comments={this.state.comments}
-              startInput={this.state.startInput}
               expenseType={this.state.selectedExpenseType}
               amount={this.state.inputAmount}
               date={this.state.date}

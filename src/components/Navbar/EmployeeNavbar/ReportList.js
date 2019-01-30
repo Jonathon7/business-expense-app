@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getReports } from "../../../ducks/reducer";
+import { getReports, getApproved, getDenied } from "../../../ducks/reducer";
 import styles from "./reportList.module.scss";
+import receipt from "../../../images/receipt.png";
 
 class ReportList extends Component {
   constructor() {
@@ -10,20 +11,43 @@ class ReportList extends Component {
     this.state = {
       title: "",
       date: "",
+      expenseType: "",
+      amount: "",
+      comments: "",
+      denialComments: "",
       showForm: false,
       showFormText: false,
-      showOverlay: false
+      showOverlay: false,
+      showReceipt: false,
+      receipts: ""
     };
   }
+
   componentDidMount() {
     this.props.getReports();
+    this.props.getApproved();
+    this.props.getDenied();
   }
 
-  showForm = (id, title, date) => {
+  showForm = (
+    id,
+    title,
+    date,
+    comments,
+    expenseType,
+    amount,
+    denialComments,
+    receipts
+  ) => {
     this.setState({
       showForm: true,
       title: title,
-      date: date
+      date: date,
+      comments: comments,
+      expenseType: expenseType,
+      amount: amount,
+      denialComments: denialComments,
+      receipts: receipts
     });
 
     setTimeout(() => {
@@ -42,6 +66,12 @@ class ReportList extends Component {
     });
   };
 
+  showReceipt = () => {
+    this.setState({
+      showReceipt: true
+    });
+  };
+
   render() {
     let dispReportsList;
     if (this.props.reports.data) {
@@ -49,9 +79,18 @@ class ReportList extends Component {
         return (
           <div
             key={report.report_id}
-            className={styles.reportListCont}
+            className={styles.submittedCont}
             onClick={() =>
-              this.showForm(report.report_id, report.title, report.date)
+              this.showForm(
+                report.report_id,
+                report.title,
+                report.date,
+                report.comments,
+                report.expense_type,
+                report.amount,
+                report.denialComments,
+                report.receipts
+              )
             }
           >
             <div>
@@ -63,9 +102,75 @@ class ReportList extends Component {
         );
       });
     }
+    let dispApproved;
+    if (this.props.approved.data) {
+      dispApproved = this.props.approved.data.map(report => {
+        return (
+          <div
+            key={report.report_id}
+            className={styles.reportListCont}
+            onClick={() =>
+              this.showForm(
+                report.report_id,
+                report.title,
+                report.date,
+                report.comments,
+                report.expense_type,
+                report.amount,
+                report.denialComments,
+                report.receipts
+              )
+            }
+          >
+            <div>
+              <h3>{report.title}</h3>
+              <h3>{report.date}</h3>
+            </div>
+            <h3 className={styles.submittedAmount}>${report.amount}</h3>
+          </div>
+        );
+      });
+    }
+    let dispDenied;
+    if (this.props.denied.data) {
+      dispDenied = this.props.denied.data.map(report => {
+        return (
+          <div
+            key={report.report_id}
+            className={styles.deniedCont}
+            onClick={() =>
+              this.showForm(
+                report.report_id,
+                report.title,
+                report.date,
+                report.comments,
+                report.expense_type,
+                report.amount,
+                report.denial_comments,
+                report.receipts
+              )
+            }
+          >
+            <div>
+              <h3>{report.title}</h3>
+              <h3>{report.date}</h3>
+            </div>
+            <h3 className={styles.submittedAmount}>${report.amount}</h3>
+          </div>
+        );
+      });
+    }
     return (
       <div>
         <div>{dispReportsList}</div>
+        <div className={styles.approvedReports}>
+          <h3>Approved Reports</h3>
+        </div>
+        <div>{dispApproved}</div>
+        <div className={styles.deniedReports}>
+          <h3>Denied Reports</h3>
+        </div>
+        <div>{dispDenied}</div>
         {this.state.showOverlay ? (
           <div className={styles.overlay} onClick={this.hideForm} />
         ) : null}
@@ -87,21 +192,67 @@ class ReportList extends Component {
                   <h3>Report Total: </h3>${this.state.amount}
                 </div>
                 <div className={styles.comments}>
-                  <textarea
-                    name=""
-                    id=""
-                    cols="45"
-                    rows="10"
-                    value={this.state.comments}
-                    readOnly
-                  />
+                  <div>
+                    <p>Comments: </p>
+                    <textarea
+                      name=""
+                      id=""
+                      cols="45"
+                      rows={this.state.denialComments ? "5" : "10"}
+                      value={this.state.comments}
+                      readOnly
+                    />
+                  </div>
+                  {this.state.denialComments ? (
+                    <div>
+                      <p>Reason for Denial: </p>
+                      <textarea
+                        name=""
+                        id=""
+                        cols="45"
+                        rows="5"
+                        value={this.state.denialComments}
+                        readOnly
+                      />
+                    </div>
+                  ) : null}
                 </div>
+                {this.state.receipts ? (
+                  <div
+                    className={styles.receiptIcon}
+                    onClick={this.showReceipt}
+                  >
+                    <img src={receipt} alt="" />
+                  </div>
+                ) : null}
+
                 <div className={styles.closeForm} onClick={this.closeForm}>
                   X
                 </div>
               </div>
             ) : (
               <div> </div>
+            )}
+            {this.state.showReceipt ? (
+              <div className={styles.receipt}>
+                <img
+                  src={this.state.receipts}
+                  alt=""
+                  className={styles.receiptImg}
+                />
+                <div
+                  onClick={() =>
+                    this.setState({
+                      showReceipt: !this.state.showReceipt
+                    })
+                  }
+                  className={styles.hideImgX}
+                >
+                  X
+                </div>
+              </div>
+            ) : (
+              <div className={styles.hideReceipt}> </div>
             )}
           </div>
         ) : (
@@ -116,5 +267,5 @@ const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,
-  { getReports }
+  { getReports, getApproved, getDenied }
 )(ReportList);

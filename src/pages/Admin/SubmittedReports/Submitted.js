@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Navbar from "../../../components/Navbar/Navbar";
+import receipt from "../../../images/receipt.png";
 import styles from "./submitted.module.scss";
 
 export default class Submitted extends Component {
@@ -21,7 +22,12 @@ export default class Submitted extends Component {
       isPersonal: "",
       status: "",
       title: "",
-      username: ""
+      username: "",
+      reportId: "",
+      receipt: "",
+      showReceipt: false,
+      textarea: false,
+      denialComments: ""
     };
   }
 
@@ -32,7 +38,7 @@ export default class Submitted extends Component {
         if (!response.data.user) {
           this.props.history.push("/");
         } else if (response.data.user) {
-          this.props.history.push("/reports");
+          this.props.history.push("/requests");
         }
       })
       .catch(err => {
@@ -80,7 +86,9 @@ export default class Submitted extends Component {
           isPersonal: response.data[0].ispersonal,
           status: response.data[0].status,
           title: response.data[0].title,
-          username: response.data[0].username
+          username: response.data[0].username,
+          receipt: response.data[0].receipts,
+          reportId: id
         });
       })
       .catch(err => {
@@ -92,7 +100,8 @@ export default class Submitted extends Component {
     this.setState({
       showForm: false,
       showFormText: false,
-      showOverlay: false
+      showOverlay: false,
+      showReceipt: false
     });
   };
 
@@ -105,14 +114,44 @@ export default class Submitted extends Component {
   };
 
   approveReport = () => {
-    axios
-      .put("/api/report")
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    let { reportId, amount, username } = this.state;
+
+    //sets status from new to approved on report
+    axios.put("/api/report/approve/", { reportId, username }).catch(err => {
+      console.log(err);
+    });
+
+    //adds approved amount to employee's received amount column in db
+    axios.put("/api/report/amount", { username, amount }).catch(err => {
+      console.log(err);
+    });
+
+    this.setState({
+      showForm: false,
+      showFormText: false,
+      showOverlay: false
+    });
+  };
+
+  //toggles text area for denial comments
+  denialComments = () => {
+    this.setState({
+      textarea: true
+    });
+  };
+
+  denyReport = () => {
+    let { reportId, denialComments } = this.state;
+    axios.put("/api/report/deny/", { reportId, denialComments }).catch(err => {
+      console.log(err);
+    });
+
+    this.setState({
+      showForm: false,
+      showFormText: false,
+      showOverlay: false,
+      textarea: false
+    });
   };
 
   render() {
@@ -162,24 +201,83 @@ export default class Submitted extends Component {
                   <h3>Report Total: </h3>${this.state.amount}
                 </div>
                 <div className={styles.comments}>
-                  <textarea
-                    name=""
-                    id=""
-                    cols="45"
-                    rows="10"
-                    value={this.state.comments}
-                    readOnly
-                  />
+                  {!this.state.textarea ? (
+                    <textarea
+                      name=""
+                      id=""
+                      cols="45"
+                      rows="10"
+                      value={this.state.comments}
+                      readOnly
+                    />
+                  ) : (
+                    <textarea
+                      name=""
+                      id=""
+                      cols="45"
+                      rows="10"
+                      value={this.state.denialComments}
+                      onChange={e =>
+                        this.setState({ denialComments: e.target.value })
+                      }
+                    />
+                  )}
                 </div>
-                <div className={styles.approveDeny}>
-                  <button
-                    className={styles.approve}
-                    onClick={this.approveReport}
-                  >
-                    Approve
-                  </button>
-                  <button className={styles.deny}>Deny</button>
-                </div>{" "}
+                {!this.state.textarea ? (
+                  <div className={styles.approveDeny}>
+                    {" "}
+                    <button
+                      className={styles.approve}
+                      onClick={this.approveReport}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      className={styles.deny}
+                      onClick={this.denialComments}
+                    >
+                      Deny
+                    </button>{" "}
+                    {this.state.receipt ? (
+                      <img
+                        src={receipt}
+                        alt=""
+                        onClick={() =>
+                          this.setState({
+                            showReceipt: !this.state.showReceipt
+                          })
+                        }
+                        className={styles.receiptImg}
+                      />
+                    ) : null}
+                    {this.state.showReceipt ? (
+                      <div className={styles.receipt}>
+                        <img src={this.state.receipt} alt="" height="470px" />
+                        <div
+                          onClick={() =>
+                            this.setState({
+                              showReceipt: !this.state.showReceipt
+                            })
+                          }
+                          className={styles.hideImgX}
+                        >
+                          X
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.hideReceipt}> </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className={styles.submitButtonCont}>
+                    <button
+                      className={styles.submitButton}
+                      onClick={this.denyReport}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}{" "}
               </div>
             ) : (
               <div> </div>

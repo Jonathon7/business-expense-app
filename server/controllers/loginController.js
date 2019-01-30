@@ -41,7 +41,9 @@ const login = async (req, res) => {
         id: employee.employee_id,
         username: employee.username,
         picture: employee.picture,
-        name: employee.name
+        name: employee.name,
+        requested: employee.amount_requested,
+        received: employee.amount_received
       };
       res.status(200).json(req.session.user);
     }
@@ -56,9 +58,21 @@ const adminOnly = (req, res) => {
   res.status(200).json(req.session);
 };
 
+const join = (req, res) => {
+  const db = req.app.get("db");
+  db.join()
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
 module.exports = {
   signup,
   login,
   adminOnly,
-  logout
+  logout,
+  join
 };
